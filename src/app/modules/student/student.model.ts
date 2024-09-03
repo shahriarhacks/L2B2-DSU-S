@@ -32,7 +32,13 @@ const localGuardianSchema = new Schema<TLocalGuardian>({
 
 const studentSchema = new Schema<TStudent, StudentModel>(
    {
-      id: { type: String, required: true },
+      uid: { type: String, required: true, unique: true },
+      user: {
+         type: Schema.Types.ObjectId,
+         ref: "User",
+         required: true,
+         unique: true,
+      },
       name: { type: userNameSchema, required: true },
       email: { type: String, required: true },
       contactNo: { type: String, required: true },
@@ -84,8 +90,8 @@ studentSchema.pre("aggregate", function (next) {
 });
 
 //creating a custom static method
-studentSchema.statics.isUserExists = async function (id: string) {
-   const existingUser = await Student.findOne({ id });
+studentSchema.statics.isUserExists = async function (uid: string) {
+   const existingUser = await Student.findOne({ uid });
    return existingUser;
 };
 

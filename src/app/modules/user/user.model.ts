@@ -5,7 +5,7 @@ import { env_config } from "../../../config/env.config";
 
 const userSchema = new Schema<TUser>(
    {
-      id: {
+      uid: {
          type: String,
          required: true,
       },

@@ -1,4 +1,5 @@
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
+import { TUser } from "../user/user.interface";
 
 export type TUserName = {
    firstName: string;
@@ -22,7 +23,8 @@ export type TLocalGuardian = {
 };
 
 export type TStudent = {
-   id: string;
+   uid: string;
+   user: Types.ObjectId | TUser;
    name: TUserName;
    email: string;
    contactNo: string;
